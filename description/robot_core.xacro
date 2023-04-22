@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  >
+
+    <xacro:include filename="inertial_macros.xacro"/>
+
+    <!-- Example link -->
+    <!--<link name="base_link"></link> -->
+
+    <!-- <xacro:include filename="robot_core.xacro" /> -->
+
+    <!-- Colores de los materiales a ocupar en el archivo URFD-->
+    <material name="negro">
+        <color rgba="0 0 0 0"/>
+    </material>
+
+    <material name="gris">
+        <color rgba="0.41 0.38 0.53 0.85"/>
+    </material>
+
+    <material name="amarillo">
+        <color rgba="0.95 0.96 0.54 0.85"/>
+    </material>
+
+    <!-- CUERPO DEL ROBOT-->
+    <!-- Enlace base estandar para cualquier archivo inicial de URFD-->
+    <link name="base_link">
+
+    </link>
+
+    <!-- Union de enlace y chasis para el armado del prototipo-->
+    <joint name="chasis_union" type="fixed">
+        <parent link="base_link"/><!-- Clase padre-->
+        <child link="chasis"/><!-- Clase hija-->
+        <origin xyz="-0.1 0 0"/><!-- Centro del mundo-->
+    </joint>
+
+   
+
+    <!-- Chasis del prototipo-->
+    <link name="chasis">
+        <visual>
+            <origin xyz="0.15 0 0.075"/>
+            <geometry>
+                <box size="0.3 0.3 0.15"/> 
+            </geometry>
+            <material name="amarillo"/>
+        </visual>
+
+        <collision>
+            <origin xyz="0.15 0 0.075"/>
+            <geometry>
+                <box size="0.3 0.3 0.15"/> 
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass="2" x="2" y="2" z="0.5">
+            <origin xyz="0.15 0 0.075" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+
+    <!-- RUEDAS DEL ROBOT-->
+
+    <!-- Rueda Izquierda trasera-->
+    <joint name="rueda_izquierda_union" type="continuous">
+        <parent link="base_link"/><!-- Clase padre-->
+        <child link="rueda_izq"/><!-- Clase hija-->
+        <origin xyz="0 0.175 0" rpy="-${pi/2} 0 0"/><!-- Posicion de la rueda y su balanceo (rpy)-->
+        <axis xyz="0 0 1"/> <!-- Sentido del giro de la rueda-->
+    </joint>
+
+    <link name="rueda_izq">
+        <visual>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+            <material name="gris"/>
+        </visual>
+
+        <collison>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+        </collison>
+
+        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Rueda Derecha trasera-->
+    <joint name="rueda_derecha_union" type="continuous">
+        <parent link="base_link"/><!-- Clase padre-->
+        <child link="rueda_der"/><!-- Clase hija-->
+        <origin xyz="0 -0.175 0" rpy="${pi/2} 0 0"/><!-- Centro del mundo-->
+        <axis xyz="0 0 -1"/>
+    </joint>
+
+    <link name="rueda_der">
+        <visual>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+            <material name="gris"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Rueda Izquierda delantera-->
+    <joint name="rueda_izquierda_unionD" type="continuous">
+        <parent link="base_link"/><!-- Clase padre-->
+        <child link="rueda_izqD"/><!-- Clase hija-->
+        <origin xyz="0.13 0.175 0" rpy="-${pi/2} 0 0"/><!-- Centro del mundo-->
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="rueda_izqD">
+        <visual>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+            <material name="gris"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Rueda Derecha delantera-->
+    <joint name="rueda_derecha_unionD" type="continuous">
+        <parent link="base_link"/><!-- Clase padre-->
+        <child link="rueda_derD"/><!-- Clase hija-->
+        <origin xyz="0.13 -0.175 0" rpy="${pi/2} 0 0"/><!-- Centro del mundo-->
+        <axis xyz="0 0 -1"/>
+    </joint>
+
+    <link name="rueda_derD">
+        <visual>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+            <material name="gris"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.035" length="0.03"/> 
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+</robot>
