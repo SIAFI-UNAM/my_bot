@@ -6,8 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Grid1
-        - /TF1
         - /RobotModel1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -57,33 +55,31 @@ Visualization Manager:
         All Enabled: true
         base_link:
           Value: true
+        caster_wheel:
+          Value: true
         chasis:
+          Value: true
+        odom:
           Value: true
         rueda_der:
           Value: true
-        rueda_derD:
-          Value: true
         rueda_izq:
-          Value: true
-        rueda_izqD:
           Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
-        base_link:
-          chasis:
-            {}
-          rueda_der:
-            {}
-          rueda_derD:
-            {}
-          rueda_izq:
-            {}
-          rueda_izqD:
-            {}
+        odom:
+          base_link:
+            chasis:
+              caster_wheel:
+                {}
+            rueda_der:
+              {}
+            rueda_izq:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -108,6 +104,11 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        caster_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         chasis:
           Alpha: 1
           Show Axes: false
@@ -118,17 +119,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        rueda_derD:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         rueda_izq:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rueda_izqD:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -144,7 +135,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -187,25 +178,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.8813953399658203
+      Distance: 5.577430248260498
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 1.778343915939331
+        Y: 0.14622142910957336
+        Z: -1.4018269777297974
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4597983956336975
+      Pitch: 0.6153981685638428
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.516739368438721
+      Yaw: 0.06539683789014816
     Saved: ~
 Window Geometry:
   Displays:

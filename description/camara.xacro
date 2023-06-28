@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <joint name="camara_union" type="fixed">
+        <parent link="chasis"/>
+        <child link="camara_vinculo"/>
+        <origin xyz="0.305 0 0.08" rpy="0 0 0"/>
+    </joint>
+
+    <link name="camara_vinculo">
+         <visual>
+            <geometry>
+                <box size="0.01 0.03 0.03"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <joint name="camara_optical_union" type="fixed">
+        <parent link="camara_vinculo"/>
+        <child link="camara_optical_vinculo"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+    <link name="camara_optical_vinculo"></link>
+
+    
+    <gazebo reference="camara_vinculo">
+        <material>Gazebo/Red</material>
+        <sensor name="camara" type="camera"><!-- Tipo de sensor a utilizar, en este caso LASER-->
+            <pose> 0 0 0 0 0 0 </pose><!-- Punto de referencia para el sensor-->
+            <visualize>true</visualize><!-- Visualizacion dentro del entorno-->
+            <update_rate>10</update_rate><!-- Tasa de actualizacion del sensor (cada 10 segundos para el ejemplo-->
+            <camera>
+                <horizontal_fov>1.089</horizontal_fov><!--Se estipula el ancho (o angulo de vision) de la camara en radianes-->
+                <image>
+                    <format>R8G8B8</format><!-- Sistema RGB de 8 bits-->
+                    <width>640</width><!-- Amcho y largo de la visualizacion de la camara-->
+                    <height>480</height>
+                </image>
+                <clip><!-- Cercania y alejamiento que la camara sera capaz de captar-->
+                    <near>0.05</near><!-- 50 milimetros lo mas cercano que puede visualizar-->
+                    <far>8.0</far><!-- 8 metros lo mas lejano que puede visualizar-->
+                </clip>
+            </camera>
+            <plugin name="camara_controller" filename="libgazebo_ros_camera.so"><!-- Controladores estandar de ROS para la visualizacion en GAZEBO-->
+                <frame_name>camara_optical</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

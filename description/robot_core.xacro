@@ -9,16 +9,20 @@
     <!-- <xacro:include filename="robot_core.xacro" /> -->
 
     <!-- Colores de los materiales a ocupar en el archivo URFD-->
-    <material name="negro">
-        <color rgba="0 0 0 0"/>
+    <material name="white">
+        <color rgba="1 1 1 1" />
     </material>
 
-    <material name="gris">
-        <color rgba="0.41 0.38 0.53 0.85"/>
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
     </material>
 
-    <material name="amarillo">
-        <color rgba="0.95 0.96 0.54 0.85"/>
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
     </material>
 
     <!-- CUERPO DEL ROBOT-->
@@ -38,25 +42,28 @@
 
     <!-- Chasis del prototipo-->
     <link name="chasis">
-        <visual>
+         <visual>
             <origin xyz="0.15 0 0.075"/>
             <geometry>
-                <box size="0.3 0.3 0.15"/> 
+                <box size="0.3 0.3 0.15"/>
             </geometry>
-            <material name="amarillo"/>
+            <material name="white"/>
         </visual>
-
         <collision>
             <origin xyz="0.15 0 0.075"/>
             <geometry>
-                <box size="0.3 0.3 0.15"/> 
+                <box size="0.3 0.3 0.15"/>
             </geometry>
         </collision>
-
-        <xacro:inertial_box mass="2" x="2" y="2" z="0.5">
+        <xacro:inertial_box mass="0.5" x="0.3" y="0.3" z="0.15">
             <origin xyz="0.15 0 0.075" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
+
+    <!-- Valores necesarios para iniciar materiales dentro de un ambiente en Gazebo-->
+    <gazebo reference="chasis">
+        <material>Gazebo/White</material>
+    </gazebo>
 
 
     <!-- RUEDAS DEL ROBOT-->
@@ -72,21 +79,25 @@
     <link name="rueda_izq">
         <visual>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
-            <material name="gris"/>
+            <material name="blue"/>
         </visual>
-
-        <collison>
+        <collision>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
-        </collison>
-
-        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+        </collision>
+        <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="rueda_izq">
+        <material>
+            Gazebo/Blue
+        </material>
+    </gazebo>
 
     <!-- Rueda Derecha trasera-->
     <joint name="rueda_derecha_union" type="continuous">
@@ -99,71 +110,53 @@
     <link name="rueda_der">
         <visual>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
-            <material name="gris"/>
+            <material name="blue"/>
         </visual>
-
         <collision>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
         </collision>
-
-        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+        <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+    <gazebo reference="rueda_der">
+        <material>
+            Gazebo/Blue
+        </material>
+    </gazebo>
 
-    <!-- Rueda Izquierda delantera-->
-    <joint name="rueda_izquierda_unionD" type="continuous">
-        <parent link="base_link"/><!-- Clase padre-->
-        <child link="rueda_izqD"/><!-- Clase hija-->
-        <origin xyz="0.13 0.175 0" rpy="-${pi/2} 0 0"/><!-- Centro del mundo-->
-        <axis xyz="0 0 1"/>
+    <joint name="caster_wheel_joint" type="fixed">
+        <parent link="chasis"/>
+        <child link="caster_wheel"/>
+        <origin xyz="0.24 0 0"/>
     </joint>
 
-    <link name="rueda_izqD">
+
+    <link name="caster_wheel">
         <visual>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <sphere radius="0.05"/>
             </geometry>
-            <material name="gris"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
+                <sphere radius="0.05"/>
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
+        <xacro:inertial_sphere mass="0.1" radius="0.05">
             <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_cylinder>
+        </xacro:inertial_sphere>
     </link>
 
-    <!-- Rueda Derecha delantera-->
-    <joint name="rueda_derecha_unionD" type="continuous">
-        <parent link="base_link"/><!-- Clase padre-->
-        <child link="rueda_derD"/><!-- Clase hija-->
-        <origin xyz="0.13 -0.175 0" rpy="${pi/2} 0 0"/><!-- Centro del mundo-->
-        <axis xyz="0 0 -1"/>
-    </joint>
-
-    <link name="rueda_derD">
-        <visual>
-            <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
-            </geometry>
-            <material name="gris"/>
-        </visual>
-
-        <collision>
-            <geometry>
-                <cylinder radius="0.035" length="0.03"/> 
-            </geometry>
-        </collision>
-        <xacro:inertial_cylinder mass="0.1" length="0.03" radius="0.035">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_cylinder>
-    </link>
+    <gazebo reference="caster_wheel">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>
+    </gazebo>
 
 </robot>
