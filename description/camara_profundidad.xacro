@@ -27,14 +27,14 @@
     
     <gazebo reference="camara_vinculo">
         <material>Gazebo/Red</material>
-        <sensor name="camera" type="camera"><!-- Tipo de sensor a utilizar, en este caso LASER-->
+        <sensor name="camera" type="depth"><!-- Tipo de sensor a utilizar, en este caso LASER-->
             <pose> 0 0 0 0 0 0 </pose><!-- Punto de referencia para el sensor-->
             <visualize>true</visualize><!-- Visualizacion dentro del entorno-->
             <update_rate>10</update_rate><!-- Tasa de actualizacion del sensor (cada 10 segundos para el ejemplo-->
             <camera>
                 <horizontal_fov>1.089</horizontal_fov><!--Se estipula el ancho (o angulo de vision) de la camara en radianes-->
                 <image>
-                    <format>R8G8B8</format><!-- Sistema RGB de 8 bits-->
+                    <format>B8G8R8</format><!-- Sistema BGR de 8 bits, cambio de sistema por la camara de profundidad-->
                     <width>640</width><!-- Amcho y largo de la visualizacion de la camara-->
                     <height>480</height>
                 </image>
@@ -45,6 +45,9 @@
             </camera>
             <plugin name="camara_controller" filename="libgazebo_ros_camera.so"><!-- Controladores estandar de ROS para la visualizacion en GAZEBO-->
                 <frame_name>camara_optical_vinculo</frame_name>
+                <!-- Ingreso de límites para poder visualizar la cámara dentro de rviz2-->
+                <min_depth>0.1</min_depth>
+                <max_depth>100.0</max_depth>
             </plugin>
         </sensor>
     </gazebo>

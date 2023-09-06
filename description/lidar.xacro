@@ -12,7 +12,7 @@
             <geometry>
                 <box size="0.05 0.05 0.02"/>
             </geometry>
-            <material name="black"/>
+            <material name="red"/>
         </visual>
         <collision>
             <geometry>
@@ -45,7 +45,7 @@
             </ray>
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so"><!-- Controladores estandar de ROS para la visualizacion en GAZEBO-->
                 <ros>
-                    <argument>~/out:=scan</argument><!-- Argumento para lanzamiento del archivo dentro de ROS-->
+                    <argument>--ros-args --remap ~/out:=scan</argument><!-- Argumento para lanzamiento del archivo dentro de ROS-->
                 </ros>
                 <output_type>sensor_msgs/LaserScan</output_type><!-- Tipo de mensaje de salida-->
                 <frame_name>sensor_lidar</frame_name>

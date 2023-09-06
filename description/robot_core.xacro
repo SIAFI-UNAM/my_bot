@@ -25,6 +25,10 @@
         <color rgba="0 0 0 1"/>
     </material>
 
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
     <!-- CUERPO DEL ROBOT-->
     <!-- Enlace base estandar para cualquier archivo inicial de URFD-->
     <link name="base_link">
