@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="XboxControl type="system"> <!--Se nombra a la etiqueta y se muestra el nivel de manejo que tendra con type-->
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin> <!--Se llama al control dentro de ros2-->
+        </hardware>
+        <joint></joint>
+    </ros2_control
+   
+
+</robot>
